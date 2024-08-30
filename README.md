@@ -1,0 +1,2 @@
+# CSCI-2101-F2024
+Coursework for F2024 CSCI-2101
