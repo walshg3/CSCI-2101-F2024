@@ -26,6 +26,13 @@ public class CatNames {
         System.out.println("Cat 2's name is " + a.getCat2());
         a.setVoidCat2("Sara");
         System.out.println("Cat 2's name is now " + a.getCat2());
+        System.out.println(b.getCat1());
+        System.out.println(b.getCat2());
+
+        Playground play = new Playground();
+        System.out.println(play.addExlamationPoint(a.getCat1()));
+        
+
 
     }
 }
