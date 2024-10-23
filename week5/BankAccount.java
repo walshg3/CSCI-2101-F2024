@@ -38,6 +38,8 @@ public class BankAccount {
     private String dob; // this.dob
     private int ssn; // this.ssn
     private int accountNumber; // this.accountNumber
+    public double interestRate = 0.01;
+    public int period = 4; // quarterly
     // interestRate (interest)
     // period (interest)
     
@@ -105,6 +107,32 @@ public class BankAccount {
         System.out.println("Balance: $" + this.balance);
     }
 
+
+    // Create a method that will calculate the interest on the balance using coumpound interest
+    // P(1 + R/n)^(nt) - P
+    // A = P(1 + R/n )^(nt)
+    // P = Principal
+    // R = Rate
+    // n = number of times interest ins compunded per year (annum)
+    // t = number of years
+    // This method will take a double as an argument
+    // Hint: P can be this.balance or getBalance() if you would like to use the getter
+
+    public void compoundInterest(double principal, int time, double rate, int annum ){
+        double amount = principal + Math.pow(1 + (rate/annum), annum * time); // P(1 + R/n )^(nt)
+        double roundedAmount = Math.round(amount * 100.0) / 100.0; // important for the output
+        double compInterest = amount - principal;  // A-P
+        compInterest = Math.round(compInterest * 100.0) / 100.0;
+
+        System.out.println("Current Rate is: " + rate + "%");
+        System.out.println("Current Period is: " + annum + " times per year");
+        System.out.println("Selected Time is: " + time + " years");
+        System.out.println("Compound Interest after " + time + " years is: $" + compInterest);
+        System.out.println("Total Amount after " + time + " years is: $" + roundedAmount);
+    }
+
+
+
     // Create a method that will print a menu to the user
     // This is called a helper method / function
     public static int menu() {
@@ -115,6 +143,8 @@ public class BankAccount {
         System.out.println("1. Deposit");
         System.out.println("2. Withdraw");
         System.out.println("3. Print Balance");
+        System.out.println("4. Compound Interest");
+        System.err.println("0. Exit");
         choice = input.nextInt(); // Collect the user's input
         return choice; // Return the user's input
     }
@@ -122,5 +152,37 @@ public class BankAccount {
     // Create a method that will interact with the user based on their 
     // choice from the menu.
     // This method will take a BankAccount object as a parameter
-
+    public static void interact(BankAccount account){
+        // get the choice from the menu method
+        // Create a scanner object
+        int choice = menu();
+        Scanner input = new Scanner(System.in);
+        
+        // user the choice from the menu to run the method associated with that choice
+        
+        if (choice == 1){ // Deposit
+            System.out.println("Please enter the amount you would like to deposit: ");
+            double amount = input.nextDouble(); // save the amount from user to deposit
+            account.deposit(amount); // pass the amount into the account.deposit method
+            account.printBalance(); // print the balance to the user
+        } else if (choice == 2){ // Withdraw
+            System.out.println("Please enter the amount you would like to withdraw: ");
+            double amount = input.nextDouble(); // save the amount from user to withdraw
+            account.withdraw(amount); // pass the amount into the account.withdraw method
+            account.printBalance(); // print the balance to the user
+        } else if (choice == 3){ // Print Balance
+            account.printBalance();
+        } else if (choice == 4){ // Compound Interest
+            System.out.println("Compound Interest Calculator");
+            System.out.println("How many years? (Whole Numbers Only)");
+            int years = input.nextInt();
+            account.compoundInterest(account.getBalance(), years, account.interestRate, account.period);
+            account.printBalance();
+        } else if (choice == 0){ // Exit the program
+            System.out.println("Thank you for Banking with us today. Goodbye!");
+            input.close();
+        } else { // this would catch any invalid choices
+            System.out.println("Invalid Choice");
+        }
+    }
 }

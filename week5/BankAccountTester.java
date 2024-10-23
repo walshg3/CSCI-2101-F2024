@@ -29,9 +29,10 @@ public class BankAccountTester {
         bankTest.printBalance();
         System.out.println("==================");
         
-        int userChoice = BankAccount.menu(); // This is a static method, so we can call it without creating an object
+        // int userChoice = BankAccount.menu(); // This is a static method, so we can call it without creating an object
 
-        System.out.println("User Choice: " + userChoice);
+        // System.out.println("User Choice: " + userChoice);
 
+        BankAccount.interact(bankTest);
     }
 }
