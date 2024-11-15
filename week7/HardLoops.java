@@ -1,6 +1,6 @@
-package week6;
+package week7;
 
-public class hardLoops {
+public class HardLoops {
 
 
 
