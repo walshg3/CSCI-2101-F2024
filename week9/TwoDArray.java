@@ -56,7 +56,7 @@ public class TwoDArray {
             System.out.println();
         }
 
-        // How do we print the elements in a tow dimensional array using a for each loop?
+        // How do we print the elements in a two dimensional array using a for each loop?
         for (int[] row : matrix) {
             for (int element : row) {
                 System.out.print(element + " ");
